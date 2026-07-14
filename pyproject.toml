@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rtgn-svdd"
+version = "0.1.0"
+description = "Companion implementation of TGN-SVDD and rTGN-SVDD"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = [
+    "numpy",
+    "torch",
+    "torch-geometric",
+]
+
+[project.scripts]
+rtgn-svdd = "rtgn_svdd.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest"]
+plotting = ["matplotlib"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

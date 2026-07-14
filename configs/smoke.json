@@ -1,0 +1,51 @@
+{
+  "data": {
+    "days": {
+      "friday": "data/friday.csv",
+      "thursday": "data/thursday.csv",
+      "tuesday": "data/tuesday.csv",
+      "wednesday": "data/wednesday.csv"
+    },
+    "feature_columns": null,
+    "num_train": 8,
+    "num_validation": 4
+  },
+  "evaluation": {
+    "allow_self_edges": false,
+    "feature_distribution": "paper_covariance_5",
+    "noise_ratios": [0.1],
+    "noise_seeds": [0],
+    "protocol": "paper_recovered",
+    "reporting_days": ["tuesday"],
+    "tuning": {
+      "day": "wednesday",
+      "noise_ratio": 0.05,
+      "noise_seed": 0
+    }
+  },
+  "experiment": {
+    "device": "cpu",
+    "name": "smoke",
+    "output_root": "outputs"
+  },
+  "model": {
+    "endpoint_dim": 8,
+    "memory_dim": 8,
+    "neighbor_size": 2,
+    "time_dim": 8,
+    "uncertainty_mode": "per_dimension_log_variance"
+  },
+  "schema_version": 1,
+  "training": {
+    "batch_size": 4,
+    "checkpoint_selection": "final_configured_epoch",
+    "day": "wednesday",
+    "epochs": 1,
+    "learning_rate": 0.0001,
+    "negative_covariance": 5.0,
+    "negative_ratio": 0.3,
+    "seed": 0,
+    "update_injected_state": true,
+    "weight_decay": 0.0
+  }
+}

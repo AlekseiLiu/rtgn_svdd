@@ -1,0 +1,20 @@
+# Optional NVIDIA GPU environment:
+#   PYTHONNOUSERSITE=1 conda env create -f environment-cuda.yml
+# The PyTorch/CUDA pairing follows the official PyTorch 2.5.1 installation matrix.
+name: rtgn_svdd_cuda
+variables:
+  PYTHONNOUSERSITE: "1"
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pytorch=2.5.1
+  - pytorch-cuda=12.4
+  # Match the PyTorch 2.5.1 dependency metadata during the Conda phase.
+  - sympy=1.13.1
+  - mpmath=1.3.0
+  - pip
+  - pip:
+      - "-e .[dev,plotting]"

@@ -1,0 +1,6 @@
+include LICENSE
+include README.md
+include environment.yml
+include environment-cuda.yml
+recursive-include configs *.json
+include scripts/run_demo.sh

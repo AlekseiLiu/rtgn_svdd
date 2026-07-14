@@ -1,0 +1,49 @@
+{
+  "data": {
+    "days": {
+      "tuesday": "data/tuesday.csv",
+      "wednesday": "data/wednesday.csv"
+    },
+    "feature_columns": null,
+    "num_train": 200000,
+    "num_validation": 70000
+  },
+  "evaluation": {
+    "allow_self_edges": false,
+    "feature_distribution": "paper_covariance_5",
+    "noise_ratios": [0.1, 0.3, 0.5],
+    "noise_seeds": [0, 1, 2],
+    "protocol": "paper_recovered",
+    "reporting_days": ["tuesday"],
+    "tuning": {
+      "day": "wednesday",
+      "noise_ratio": 0.05,
+      "noise_seed": 0
+    }
+  },
+  "experiment": {
+    "device": "cuda:0",
+    "name": "demo",
+    "output_root": "outputs/demo"
+  },
+  "model": {
+    "endpoint_dim": 200,
+    "memory_dim": 200,
+    "neighbor_size": 10,
+    "time_dim": 200,
+    "uncertainty_mode": "per_dimension_log_variance"
+  },
+  "schema_version": 1,
+  "training": {
+    "batch_size": 200,
+    "checkpoint_selection": "wednesday_f1",
+    "day": "wednesday",
+    "epochs": 15,
+    "learning_rate": 0.0001,
+    "negative_covariance": 5.0,
+    "negative_ratio": 0.3,
+    "seed": 0,
+    "update_injected_state": false,
+    "weight_decay": 0.0
+  }
+}

@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+build/
+dist/
+
+# Prepared CIC-IDS2017 files and generated experiment artifacts.
+data/
+outputs/
