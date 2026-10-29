@@ -1,5 +1,7 @@
 # rTGN-SVDD
 
+![CI](https://github.com/AlekseiLiu/rtgn_svdd/actions/workflows/ci.yml/badge.svg)
+
 Companion code for
 [Noise Robust One-Class Intrusion Detection on Dynamic Graphs](https://arxiv.org/abs/2508.14192).
 The repository implements the TGN-SVDD baseline and its probabilistic,

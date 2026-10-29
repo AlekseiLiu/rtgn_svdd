@@ -1,0 +1,60 @@
+# Continuous integration: lint the code and run the test suite on GitHub's
+# clean Linux machines. The README badge points at this file (ci.yml).
+name: CI
+
+# When to run: on every push to main and on every pull request.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# The jobs only need to read the repository.
+permissions:
+  contents: read
+
+# A newer push to the same branch or pull request cancels the older run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Static check with ruff. Rule set F (pyflakes) reports real errors such as
+  # unused imports and undefined names; style rules are not checked.
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.10"
+      - name: Install ruff
+        run: pip install ruff==0.17.3
+      - name: Run ruff (rule set F)
+        run: ruff check --select F .
+
+  # Install the package and run pytest, once per Python version.
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      # Let both Python versions finish even if one fails.
+      fail-fast: false
+      matrix:
+        # Quoted, otherwise YAML reads 3.10 as the number 3.1.
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      # CPU-only torch first: the runners have no GPU, and the CPU wheel is
+      # much smaller than the default CUDA build.
+      - name: Install CPU-only torch
+        run: pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - name: Install package with test and plotting extras
+        run: pip install -e ".[dev,plotting]"
+      # pytest fails the job if any test fails or if no tests are collected.
+      - name: Run tests
+        run: pytest -q -rs
