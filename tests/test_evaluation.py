@@ -12,7 +12,6 @@ from rtgn_svdd.evaluation import (
     BASELINE_MU_PERCENTILES,
     EvaluationRecord,
     ScoreArtifact,
-    TuningSelectionArtifact,
     aggregate_records,
     attack_targets,
     evaluate_baseline,
